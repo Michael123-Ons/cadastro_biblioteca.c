@@ -37,7 +37,7 @@ int main() {
         printf("4. Emprestar Livro\n");
         printf("5. Sair\n");
         printf("Opção: ");
-        printf("%d", &opcao);
+        scanf("%d", &opcao);
         getchar();
 
 
@@ -77,7 +77,7 @@ void cadastrarLivro() {
 
     printf("Ano: ");
     scanf("%d", &livro->ano);
-    getchat();
+    getchar();
 
     livro->disponivel = 1;
     totalLivros++;
@@ -114,7 +114,7 @@ void exibirLivro(Livro *livro) {      //recebendo o ponteiro
     printf("\n--- Livro ---\n");
     printf("ID: %d\n", livro->id);
     printf("Título: %s\n", livro->titulo);
-    printf("Autor: %d\n", livro->autor);
+    printf("Autor: %s\n", livro->autor);
     printf("Ano: %d\n", livro->ano);
     printf("Status: %s\n", livro->disponivel ? "Disponível" : "Emprestado");
 }
@@ -138,13 +138,15 @@ void emprestarLivro() {
     getchar();
 
     for (int i = 0; i < totalLivros; i++) {
-        if (livros[i].disponivel){
-            livros[i].disponivel = 0;
-            printf("Livro emprestado!\n");
-        } else {
-            printf("Livro já emprestado!\n");
+        if (livros[i].id == id) {
+            if (livros[i].disponivel) {
+                livros[i].disponivel = 0;
+                printf("Livro emprestado!\n");
+            } else {
+                printf("Livro já emprestado!\n");
+            }
+            return;  
         }
-        return;
     }
     printf("Livro não encontrado!\n");
 }
